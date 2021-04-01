@@ -16,7 +16,7 @@ export const Box = ({ status }) => {
         return 'food';
     }
   }
-  return <div className={getClassName()}> {status} </div>;
+  return <div className={'box ' + getClassName(status)}> {status} </div>;
 };
 
 Box.propTypes = {

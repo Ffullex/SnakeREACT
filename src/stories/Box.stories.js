@@ -1,6 +1,6 @@
 import { Box } from './Box';
 import React from 'react';
-import { EMPTYFIELD } from '../matrix';
+import { BODYFIELD, EMPTYFIELD, FOODFIELD, HEADFIELD } from '../matrix';
 
 export default {
   title: 'Example/Box',
@@ -11,6 +11,20 @@ const Template = args => <Box {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  primary: EMPTYFIELD,
-  label: 'div'
+  status: EMPTYFIELD
+};
+
+export const Secondary = Template.bind({});
+Secondary.args = {
+  status: HEADFIELD
+};
+
+export const Third = Template.bind({});
+Third.args = {
+  status: BODYFIELD
+};
+
+export const Fourth = Template.bind({});
+Fourth.args = {
+  status: FOODFIELD
 };
