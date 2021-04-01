@@ -1,0 +1,23 @@
+.box{
+
+}
+.empty{
+    width: 10px;
+    height: 10px;
+    color: white;
+}
+.head{
+     width: 10px;
+     height: 10px;
+     color: orange;
+ }
+.body{
+    width: 10px;
+    height: 10px;
+    color: green;
+}
+.food{
+    width: 10px;
+    height: 10px;
+    color: blue;
+}
