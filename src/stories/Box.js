@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './Box.css';
 import { BODY_FIELD, EMPTY_FIELD, FOOD_FIELD, HEAD_FIELD } from '../matrix';
 
+// компонент отрисовки возможных вариантов поля (еда, змейка etc)
 export const Box = ({ status }) => {
   function getClassName(status) {
     switch (status) {

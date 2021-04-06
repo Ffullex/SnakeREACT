@@ -5,6 +5,7 @@ import { BODY_FIELD, EMPTY_FIELD, FOOD_FIELD, HEAD_FIELD } from '../matrix';
 import { Box } from './Box.js';
 import './Field.css';
 
+// компонент отрисовки поля
 export const Field = ({ matrix }) => {
   return (
     <div className="matrix">

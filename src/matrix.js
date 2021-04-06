@@ -1,15 +1,18 @@
-import { useKey } from 'react-use';
+// константы поля, змейки и еды.
 export const FIELD_SIZE = 21;
 export const EMPTY_FIELD = 0;
 export const HEAD_FIELD = 1;
 export const BODY_FIELD = 2;
 export const FOOD_FIELD = 3;
 
+// константы направления змейки
 export const UP = 0;
 export const DOWN = 1;
 export const LEFT = 2;
 export const RIGHT = 3;
 export const DIRECTIONS = { UP, DOWN, LEFT, RIGHT };
+
+// функция, которая создаёт матрицу/поле
 export function createMatrix() {
   const field = [];
   for (let i = 0; i < FIELD_SIZE; i++) {
@@ -26,31 +29,15 @@ export function createMatrix() {
   return field;
 }
 
-function chooseDirections() {
-  switch (useKey) {
-    case 'W' || 'ArrowUp' || 'w':
-      return UP;
-    case 'S' || 'ArrowDown' || 's':
-      return DOWN;
-    case 'A' || 'ArrowLeft' || 'a':
-      return LEFT;
-    case 'D' || 'ArrowRight' || 'd':
-      return RIGHT;
-  }
-}
-
-let row = Math.floor(FIELD_SIZE / 2);
-let item = Math.floor(FIELD_SIZE / 2);
-
-export function getNextMatrix(matrix, DIRECTIONS) {
+// функция, предоставляющая следующее состояние матрицы
+export function getNextMatrix(matrix, direct) {
   matrix = createMatrix();
-  DIRECTIONS = chooseDirections();
-  matrix[row][item] = HEAD_FIELD;
-  switch (DIRECTIONS) {
+  console.log(matrix.indexOf(HEAD_FIELD));
+  switch (direct) {
     case UP:
-      return matrix.item++;
+      return matrix.column++;
     case DOWN:
-      return matrix.item--;
+      return matrix.column--;
     case LEFT:
       return matrix.row++;
     case RIGHT:
