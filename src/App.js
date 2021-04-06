@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+import { useKey } from 'react-use';
 import './matrix';
 import './App.css';
 import Header from './components/Header';
-import { createMatrix, getNextMatrix, UP } from './matrix';
+import { createMatrix, DIRECTIONS, getNextMatrix, UP } from "./matrix";
 import { Field } from './stories/Field';
 
 function App() {
   const [matrix, setMatrix] = useState(createMatrix());
 
-  // useEffect(() => {
-  //   let intervalId;
-  //
-  //   intervalId = setInterval(() => {
-  //     setMatrix(getNextMatrix(matrix, UP));
-  //   }, 1000);
-  //
-  //   return () => {
-  //     clearInterval(intervalId);
-  //   };
-  // }, []);
+  useEffect(() => {
+    let intervalId;
+
+    intervalId = setInterval(() => {
+      setMatrix(getNextMatrix(matrix, DIRECTIONS));
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <>
