@@ -31,16 +31,26 @@ export function createMatrix() {
 
 // функция, предоставляющая следующее состояние матрицы
 export function getNextMatrix(matrix, direct) {
-  matrix = createMatrix();
-  console.log(matrix.indexOf(HEAD_FIELD));
+  let x;
+  let y;
+  for (let row = 0; row < FIELD_SIZE; row++) {
+    for (let column = 0; column < FIELD_SIZE; column++) {
+      if (matrix[row][column] === HEAD_FIELD) {
+          x = row;
+          y = column;
+      }
+    }
+  }
+  matrix [x][y] = FIELD_SIZE;
   switch (direct) {
     case UP:
-      return matrix.column++;
+      return x--;
     case DOWN:
-      return matrix.column--;
+      return x++;
     case LEFT:
-      return matrix.row++;
+      return y--;
     case RIGHT:
-      return matrix.row--;
+      return y++;
   }
+  matrix [x][y] = HEAD_FIELD;
 }

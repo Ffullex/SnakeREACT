@@ -10,10 +10,10 @@ function App() {
   const [matrix, setMatrix] = useState(createMatrix());
   const [direct, setDirect] = useState();
 
-  useKey('ArrowUp' ,() => setDirect(UP));
-  useKey('ArrowDown' ,() => setDirect(DOWN));
-  useKey('ArrowLeft' ,() => setDirect(LEFT));
-  useKey('ArrowRight' ,() => setDirect(RIGHT));
+  useKey('ArrowUp', () => setDirect(UP));
+  useKey('ArrowDown', () => setDirect(DOWN));
+  useKey('ArrowLeft', () => setDirect(LEFT));
+  useKey('ArrowRight', () => setDirect(RIGHT));
 
   useEffect(() => {
     let intervalId;
