@@ -1,17 +1,21 @@
 .box {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #50195a;
+    margin: 1px 1px 1px 1px;
 }
 
 .empty{
-    background-color: #510f0f;
+    background-color: #2b4e1a;
+
 }
 .head{
-     background-color: orange;
+     background-color: #fcce00;
+
  }
 .body{
-    background-color: green;
+    background-color: #0f3c7a;
 }
 .food{
-    background-color: blue;
+    background-color: #ff0000;
 }

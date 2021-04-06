@@ -1,5 +1,5 @@
 import React from 'react';
-import { EMPTYFIELD } from '../matrix';
+import { createMatrix } from '../matrix';
 import { Field } from './Field';
 
 export default {
@@ -11,5 +11,5 @@ const Template = args => <Field {...args} />;
 
 export const PrimaryField = Template.bind({});
 PrimaryField.args = {
-  status: EMPTYFIELD
+  matrix: createMatrix()
 };

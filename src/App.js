@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import './matrix';
 import './App.css';
 import Header from './components/Header';
-// import createMatrix from './matrix';
+import { createMatrix, getNextMatrix, UP } from './matrix';
+import { Field } from './stories/Field';
 
-// Массив 10х10
 function App() {
-  // const [matrix, setMatrix] = useState(createMatrix());
+  const [matrix, setMatrix] = useState(createMatrix());
 
-  return <Header />;
+  // useEffect(() => {
+  //   let intervalId;
+  //
+  //   intervalId = setInterval(() => {
+  //     setMatrix(getNextMatrix(matrix, UP));
+  //   }, 1000);
+  //
+  //   return () => {
+  //     clearInterval(intervalId);
+  //   };
+  // }, []);
+
+  return (
+    <>
+      <Header />
+      <Field matrix={matrix} />
+    </>
+  );
 }
 
 export default App;

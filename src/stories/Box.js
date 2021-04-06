@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Box.css';
-import { BODYFIELD, EMPTYFIELD, FOODFIELD, HEADFIELD } from '../matrix';
+import { BODY_FIELD, EMPTY_FIELD, FOOD_FIELD, HEAD_FIELD } from '../matrix';
 
 export const Box = ({ status }) => {
   function getClassName(status) {
     switch (status) {
-      case EMPTYFIELD:
+      case EMPTY_FIELD:
         return 'empty';
-      case HEADFIELD:
+      case HEAD_FIELD:
         return 'head';
-      case BODYFIELD:
+      case BODY_FIELD:
         return 'body';
-      case FOODFIELD:
+      case FOOD_FIELD:
         return 'food';
     }
   }
@@ -20,9 +20,9 @@ export const Box = ({ status }) => {
 };
 
 Box.propTypes = {
-  status: PropTypes.oneOf([EMPTYFIELD, HEADFIELD, BODYFIELD, FOODFIELD])
+  status: PropTypes.oneOf([EMPTY_FIELD, HEAD_FIELD, BODY_FIELD, FOOD_FIELD])
 };
 
 Box.defaultProps = {
-  status: EMPTYFIELD
+  status: EMPTY_FIELD
 };
