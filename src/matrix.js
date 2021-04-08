@@ -44,13 +44,23 @@ export function getNextMatrix(matrix, direct) {
   matrix[xHead][yHead] = EMPTY_FIELD;
   switch (direct) {
     case UP:
-      return xHead--;
+      xHead--;
+      if (xHead < 0) xHead = FIELD_SIZE - 1;
+      break;
     case DOWN:
-      return xHead++;
+      xHead++;
+      if (xHead > FIELD_SIZE - 1) xHead = 0;
+      break;
     case LEFT:
-      return yHead--;
+      yHead--;
+      if (yHead < 0) yHead = FIELD_SIZE - 1;
+      break;
     case RIGHT:
-      return yHead++;
+      yHead++;
+      if (yHead > FIELD_SIZE - 1) yHead = 0;
+      break;
   }
+
   matrix[xHead][yHead] = HEAD_FIELD;
+  return [...matrix];
 }
