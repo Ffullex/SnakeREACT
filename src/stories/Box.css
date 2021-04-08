@@ -7,15 +7,17 @@
 
 .empty{
     background-color: #2b4e1a;
-
 }
+
 .head{
      background-color: #fcce00;
-
  }
+
 .body{
     background-color: #0f3c7a;
 }
+
 .food{
-    background-color: #ff0000;
+    /*background-image: url('Food.png');*/
+    background-color: crimson;
 }
