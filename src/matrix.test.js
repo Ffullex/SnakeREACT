@@ -1,10 +1,8 @@
 import {
-  BODY_FIELD,
   createFood,
   DOWN,
   EMPTY_FIELD,
   FIELD_SIZE,
-  FOOD_FIELD,
   getNextMatrix,
   HEAD_FIELD,
   LEFT,
@@ -14,8 +12,6 @@ import {
   UP
 } from './matrix';
 import { createMatrix } from './matrix';
-import { initMetric } from 'web-vitals/dist/modules/lib/initMetric';
-import { xHead, yHead } from './head';
 
 test('Тест функции создания матрицы', () => {
   const array = [];
