@@ -10,7 +10,6 @@ export const UP = 0;
 export const DOWN = 1;
 export const LEFT = 2;
 export const RIGHT = 3;
-export const DIRECTIONS = { UP, DOWN, LEFT, RIGHT };
 
 // функция, которая создаёт матрицу/поле
 export function createMatrix() {
@@ -29,9 +28,6 @@ export function createMatrix() {
   return field;
 }
 
-let xHead;
-let yHead;
-
 // функция поиска головы
 export function searchHead(matrix) {
   for (let row = 0; row < FIELD_SIZE; row++) {
@@ -42,12 +38,16 @@ export function searchHead(matrix) {
       }
     }
   }
+  return matrix;
 }
+
+let xHead;
+let yHead;
 
 // функция, предоставляющая следующее состояние матрицы
 export function getNextMatrix(matrix, direct) {
   searchHead(matrix);
-
+  // Сделать всю матрицу просто полем. Считать направление
   matrix[xHead][yHead] = EMPTY_FIELD;
   switch (direct) {
     case UP:
@@ -67,7 +67,8 @@ export function getNextMatrix(matrix, direct) {
       if (yHead > FIELD_SIZE - 1) yHead = 0;
       break;
   }
-
+  // Сделать поле головой в соответствии с направлением
   matrix[xHead][yHead] = HEAD_FIELD;
+
   return [...matrix];
 }

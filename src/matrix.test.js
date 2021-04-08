@@ -1,4 +1,4 @@
-import { DOWN, FIELD_SIZE, getNextMatrix, HEAD_FIELD, LEFT, RIGHT, searchHead, UP } from './matrix';
+import {DOWN, EMPTY_FIELD, FIELD_SIZE, getNextMatrix, HEAD_FIELD, LEFT, RIGHT, searchHead, UP} from './matrix';
 import { createMatrix } from './matrix';
 
 test('Проверка на то, что существует массив с нулями на сто ячеек', () => {
@@ -59,38 +59,50 @@ test('Тест функции поиска Head', () => {
   expect([Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)]).toBe(searchHead(initialMatrix));
 });
 
-test('Тест на выход за рамки массива UP',  () => {
-  const initialMatrix = createMatrix();
-  const presentMatrix = createMatrix();
-  for (let i = 0; i < FIELD_SIZE; i++){
-    getNextMatrix(initialMatrix, UP);
-  }
+test('Тест на выход за рамки массива UP', () => {
+  let initialMatrix = createMatrix();
+  initialMatrix[Math.floor(FIELD_SIZE / 2) ][Math.floor(FIELD_SIZE / 2) ] = EMPTY_FIELD;
+  initialMatrix[0][0] = HEAD_FIELD;
+  let presentMatrix = createMatrix();
+  presentMatrix[Math.floor(FIELD_SIZE / 2) ][Math.floor(FIELD_SIZE / 2) ] = EMPTY_FIELD;
+  presentMatrix[FIELD_SIZE - 1][0] = HEAD_FIELD;
+
+  initialMatrix = getNextMatrix(initialMatrix, UP);
   expect(initialMatrix).toEqual(presentMatrix);
 });
 
-test('Тест на выход за рамки массива DOWN',  () => {
-  const initialMatrix = createMatrix();
-  const presentMatrix = createMatrix();
-  for (let i = 0; i < FIELD_SIZE; i++){
-    getNextMatrix(initialMatrix, DOWN);
-  }
+test('Тест на выход за рамки массива DOWN', () => {
+  let initialMatrix = createMatrix();
+  initialMatrix[Math.floor(FIELD_SIZE / 2) ][Math.floor(FIELD_SIZE / 2) ] = EMPTY_FIELD;
+  initialMatrix[FIELD_SIZE - 1][0] = HEAD_FIELD;
+  let presentMatrix = createMatrix();
+  presentMatrix[Math.floor(FIELD_SIZE / 2) ][Math.floor(FIELD_SIZE / 2) ] = EMPTY_FIELD;
+  presentMatrix[0][0] = HEAD_FIELD;
+
+  initialMatrix = getNextMatrix(initialMatrix, DOWN);
   expect(initialMatrix).toEqual(presentMatrix);
 });
 
-test('Тест на выход за рамки массива LEFT',  () => {
-  const initialMatrix = createMatrix();
-  const presentMatrix = createMatrix();
-  for (let i = 0; i < FIELD_SIZE; i++){
-    getNextMatrix(initialMatrix, LEFT);
-  }
+test('Тест на выход за рамки массива LEFT', () => {
+  let initialMatrix = createMatrix();
+  initialMatrix[Math.floor(FIELD_SIZE / 2) ][Math.floor(FIELD_SIZE / 2) ] = EMPTY_FIELD;
+  initialMatrix[0][0] = HEAD_FIELD;
+  let presentMatrix = createMatrix();
+  presentMatrix[Math.floor(FIELD_SIZE / 2) ][Math.floor(FIELD_SIZE / 2) ] = EMPTY_FIELD;
+  presentMatrix[0][FIELD_SIZE - 1] = HEAD_FIELD;
+
+  initialMatrix = getNextMatrix(initialMatrix, LEFT);
   expect(initialMatrix).toEqual(presentMatrix);
 });
 
-test('Тест на выход за рамки массива RIGHT',  () => {
-  const initialMatrix = createMatrix();
-  const presentMatrix = createMatrix();
-  for (let i = 0; i < FIELD_SIZE; i++){
-    getNextMatrix(initialMatrix, RIGHT);
-  }
+test('Тест на выход за рамки массива RIGHT', () => {
+  let initialMatrix = createMatrix();
+  initialMatrix[Math.floor(FIELD_SIZE / 2) ][Math.floor(FIELD_SIZE / 2) ] = EMPTY_FIELD;
+  initialMatrix[0][FIELD_SIZE - 1] = HEAD_FIELD;
+  let presentMatrix = createMatrix();
+  presentMatrix[Math.floor(FIELD_SIZE / 2) ][Math.floor(FIELD_SIZE / 2) ] = EMPTY_FIELD;
+  presentMatrix[0][0] = HEAD_FIELD;
+
+  initialMatrix = getNextMatrix(initialMatrix, RIGHT);
   expect(initialMatrix).toEqual(presentMatrix);
 });
