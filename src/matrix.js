@@ -31,26 +31,26 @@ export function createMatrix() {
 
 // функция, предоставляющая следующее состояние матрицы
 export function getNextMatrix(matrix, direct) {
-  let x;
-  let y;
+  let xHead;
+  let yHead;
   for (let row = 0; row < FIELD_SIZE; row++) {
     for (let column = 0; column < FIELD_SIZE; column++) {
       if (matrix[row][column] === HEAD_FIELD) {
-          x = row;
-          y = column;
+        xHead = row;
+        yHead = column;
       }
     }
   }
-  matrix [x][y] = FIELD_SIZE;
+  matrix[xHead][yHead] = EMPTY_FIELD;
   switch (direct) {
     case UP:
-      return x--;
+      return xHead--;
     case DOWN:
-      return x++;
+      return xHead++;
     case LEFT:
-      return y--;
+      return yHead--;
     case RIGHT:
-      return y++;
+      return yHead++;
   }
-  matrix [x][y] = HEAD_FIELD;
+  matrix[xHead][yHead] = HEAD_FIELD;
 }
