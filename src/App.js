@@ -27,7 +27,7 @@ function App() {
     let intervalId;
     intervalId = setInterval(() => {
       setMatrix(getNextMatrix(matrix, direct.current));
-    }, 500);
+    }, 100);
 
     return () => {
       clearInterval(intervalId);
