@@ -9,7 +9,7 @@ import {
   RIGHT,
   searchFood,
   searchHead,
-  UP
+  UP, xHead, yHead
 } from './matrix';
 import { createMatrix } from './matrix';
 
@@ -81,7 +81,7 @@ test('Тест на выход за рамки массива UP', () => {
   presentMatrix[FIELD_SIZE - 1][0] = HEAD_FIELD;
 
   initialMatrix = getNextMatrix(initialMatrix, UP);
-  expect(initialMatrix).toEqual(presentMatrix);
+  expect(initialMatrix).toBe(presentMatrix);
 });
 
 test('Тест на выход за рамки массива DOWN', () => {
@@ -93,7 +93,7 @@ test('Тест на выход за рамки массива DOWN', () => {
   presentMatrix[0][0] = HEAD_FIELD;
 
   initialMatrix = getNextMatrix(initialMatrix, DOWN);
-  expect(initialMatrix).toEqual(presentMatrix);
+  expect(initialMatrix).toBe(presentMatrix);
 });
 
 test('Тест на выход за рамки массива LEFT', () => {
@@ -105,7 +105,7 @@ test('Тест на выход за рамки массива LEFT', () => {
   presentMatrix[0][FIELD_SIZE - 1] = HEAD_FIELD;
 
   initialMatrix = getNextMatrix(initialMatrix, LEFT);
-  expect(initialMatrix).toEqual(presentMatrix);
+  expect(initialMatrix).toBe(presentMatrix);
 });
 
 test('Тест на выход за рамки массива RIGHT', () => {
@@ -117,7 +117,7 @@ test('Тест на выход за рамки массива RIGHT', () => {
   presentMatrix[0][0] = HEAD_FIELD;
 
   initialMatrix = getNextMatrix(initialMatrix, RIGHT);
-  expect(initialMatrix).toEqual(presentMatrix);
+  expect(initialMatrix).toBe(presentMatrix);
 });
 
 test('Тест функции создания Food', () => {

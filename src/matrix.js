@@ -11,8 +11,8 @@ export const LEFT = 2;
 export const RIGHT = 3;
 
 // Координаты головы
-let xHead;
-let yHead;
+export let xHead;
+export let yHead;
 
 // координаты еды
 let xFood;
