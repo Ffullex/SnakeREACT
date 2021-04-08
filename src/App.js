@@ -14,6 +14,14 @@ function App() {
   useKey('s', () => (direct.current = DOWN));
   useKey('a', () => (direct.current = LEFT));
   useKey('d', () => (direct.current = RIGHT));
+  useKey('W', () => (direct.current = UP));
+  useKey('S', () => (direct.current = DOWN));
+  useKey('A', () => (direct.current = LEFT));
+  useKey('D', () => (direct.current = RIGHT));
+  useKey('ArrowUp', () => (direct.current = UP));
+  useKey('ArrowDown', () => (direct.current = DOWN));
+  useKey('ArrowLeft', () => (direct.current = LEFT));
+  useKey('ArrowRight', () => (direct.current = RIGHT));
 
   useEffect(() => {
     let intervalId;

@@ -29,10 +29,11 @@ export function createMatrix() {
   return field;
 }
 
-// функция, предоставляющая следующее состояние матрицы
-export function getNextMatrix(matrix, direct) {
-  let xHead;
-  let yHead;
+let xHead;
+let yHead;
+
+// функция поиска головы
+export function searchHead(matrix) {
   for (let row = 0; row < FIELD_SIZE; row++) {
     for (let column = 0; column < FIELD_SIZE; column++) {
       if (matrix[row][column] === HEAD_FIELD) {
@@ -41,6 +42,12 @@ export function getNextMatrix(matrix, direct) {
       }
     }
   }
+}
+
+// функция, предоставляющая следующее состояние матрицы
+export function getNextMatrix(matrix, direct) {
+  searchHead(matrix);
+
   matrix[xHead][yHead] = EMPTY_FIELD;
   switch (direct) {
     case UP:
