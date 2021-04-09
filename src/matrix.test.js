@@ -1,17 +1,15 @@
 import {
   createFood,
   DOWN,
-  EMPTY_FIELD,
-  FIELD_SIZE, FOOD_FIELD,
+  FIELD_SIZE,
+  FOOD_FIELD,
   getNextMatrix,
   HEAD_FIELD,
   LEFT,
   RIGHT,
   searchFood,
-  searchHead, switchDirection,
-  UP,
-  xHead,
-  yHead
+  searchHead,
+  UP
 } from './matrix';
 import { createMatrix } from './matrix';
 
@@ -70,8 +68,10 @@ test('Идёт вправо', () => {
 
 test('Тест функции поиска Head', () => {
   const initialMatrix = createMatrix();
-  searchHead(initialMatrix);
-  expect([Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)]).toBe([xHead][yHead]);
+  const xHead = Math.floor(FIELD_SIZE / 2);
+  const yHead = Math.floor(FIELD_SIZE / 2);
+  const object = { xHead, yHead };
+  expect(object).toEqual(searchHead(initialMatrix));
 });
 
 test('Тест на выход за рамки массива UP', () => {

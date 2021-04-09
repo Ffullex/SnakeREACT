@@ -6,7 +6,8 @@
 }
 
 .empty{
-    background-color: #2b4e1a;
+    background-image: url('./Field.png');
+    background-size: 20px;
 }
 
 .head{
@@ -18,6 +19,7 @@
 }
 
 .food{
-    /*background-image: url('Food.png');*/
-    background-color: crimson;
+    background-image: url('./Food.png');
+    background-size: 20px;
+
 }

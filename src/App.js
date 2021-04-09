@@ -11,16 +11,19 @@ function App() {
   const direct = useRef(UP);
 
   useKey('w', () => (direct.current = UP));
-  useKey('s', () => (direct.current = DOWN));
-  useKey('a', () => (direct.current = LEFT));
-  useKey('d', () => (direct.current = RIGHT));
   useKey('W', () => (direct.current = UP));
-  useKey('S', () => (direct.current = DOWN));
-  useKey('A', () => (direct.current = LEFT));
-  useKey('D', () => (direct.current = RIGHT));
   useKey('ArrowUp', () => (direct.current = UP));
+
+  useKey('s', () => (direct.current = DOWN));
+  useKey('S', () => (direct.current = DOWN));
   useKey('ArrowDown', () => (direct.current = DOWN));
+
+  useKey('a', () => (direct.current = LEFT));
+  useKey('A', () => (direct.current = LEFT));
   useKey('ArrowLeft', () => (direct.current = LEFT));
+
+  useKey('d', () => (direct.current = RIGHT));
+  useKey('D', () => (direct.current = RIGHT));
   useKey('ArrowRight', () => (direct.current = RIGHT));
 
   useEffect(() => {

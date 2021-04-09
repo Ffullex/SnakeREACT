@@ -2,17 +2,13 @@ export const FIELD_SIZE = 21;
 export const EMPTY_FIELD = 0;
 export const HEAD_FIELD = 1;
 export const BODY_FIELD = 2;
-export const FOOD_FIELD = 3;
+export const FOOD_FIELD = -1;
 
 // константы направления змейки
 export const UP = 0;
 export const DOWN = 1;
 export const LEFT = 2;
 export const RIGHT = 3;
-
-// Координаты головы
-export let xHead;
-export let yHead;
 
 // координаты еды
 let xFood;
@@ -38,6 +34,9 @@ export function createMatrix() {
 
 // функция поиска головы
 export function searchHead(matrix) {
+  // Координаты головы
+  let xHead;
+  let yHead;
   for (let row = 0; row < FIELD_SIZE; row++) {
     for (let column = 0; column < FIELD_SIZE; column++) {
       if (matrix[row][column] === HEAD_FIELD) {
@@ -46,10 +45,16 @@ export function searchHead(matrix) {
       }
     }
   }
-  return matrix;
+  return { xHead, yHead };
 }
 
 // Функция предоставления случайных целых чисел не менее min и менее max
+/**
+ *
+ * @param min
+ * @param max
+ * @returns {number}
+ */
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -58,7 +63,7 @@ function getRandomInt(min, max) {
 
 // Функция создания еды
 export function createFood(matrix) {
-  console.log('Количество съеденного: ' + countFood);
+  console.log('Количество жертв: ' + countFood);
   countFood = countFood + 1;
   xFood = getRandomInt(0, FIELD_SIZE);
   yFood = getRandomInt(0, FIELD_SIZE);
@@ -91,8 +96,7 @@ export function searchFood(matrix) {
 }
 
 // обработка стрелочек
-export function switchDirection(matrix, direct) {
-
+export function switchDirection(xHead, yHead, direct) {
   switch (direct) {
     case UP:
       xHead--;
@@ -111,27 +115,28 @@ export function switchDirection(matrix, direct) {
       if (yHead > FIELD_SIZE - 1) yHead = 0;
       break;
   }
-
-  return matrix;
+  const xNextHead = xHead;
+  const yNextHead = yHead;
+  return { xNextHead, yNextHead };
 }
 
 // функция, предоставляющая следующее состояние матрицы
 export function getNextMatrix(matrix, direct) {
-  searchHead(matrix);
+  // Координаты головы
+  const prevHead = searchHead(matrix);
 
   // занулить предыдущее расположение головы
-  matrix[xHead][yHead] = EMPTY_FIELD;
+  matrix[prevHead.xHead][prevHead.yHead] = EMPTY_FIELD;
 
-  switchDirection(matrix, direct);
+  // Изменяет координаты головы
+  const nextHead = switchDirection(prevHead.xHead, prevHead.yHead, direct);
 
   // Сделать поле головой в соответствии с направлением
-  matrix[xHead][yHead] = HEAD_FIELD;
+  matrix[nextHead.xNextHead][nextHead.yNextHead] = HEAD_FIELD;
 
   if (!searchFood(matrix)) {
     createFood(matrix);
   }
-
-
 
   return [...matrix];
 }
