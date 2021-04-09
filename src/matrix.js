@@ -77,6 +77,7 @@ export function createFood(matrix) {
     }
   }
 }
+
 // Функция-флаг наличия еды
 export function searchFood(matrix) {
   for (let row = 0; row < FIELD_SIZE; row++) {
@@ -88,15 +89,10 @@ export function searchFood(matrix) {
   }
   return false;
 }
-// функция, предоставляющая следующее состояние матрицы
-export function getNextMatrix(matrix, direct) {
-  console.log(countFood + 'cc');
-  searchHead(matrix);
 
-  // занулить предыдущее расположение головы
-  matrix[xHead][yHead] = EMPTY_FIELD;
+// обработка стрелочек
+export function switchDirection(matrix, direct) {
 
-  // обработка стрелочек
   switch (direct) {
     case UP:
       xHead--;
@@ -116,12 +112,26 @@ export function getNextMatrix(matrix, direct) {
       break;
   }
 
+  return matrix;
+}
+
+// функция, предоставляющая следующее состояние матрицы
+export function getNextMatrix(matrix, direct) {
+  searchHead(matrix);
+
+  // занулить предыдущее расположение головы
+  matrix[xHead][yHead] = EMPTY_FIELD;
+
+  switchDirection(matrix, direct);
+
+  // Сделать поле головой в соответствии с направлением
+  matrix[xHead][yHead] = HEAD_FIELD;
+
   if (!searchFood(matrix)) {
     createFood(matrix);
   }
 
-  // Сделать поле головой в соответствии с направлением
-  matrix[xHead][yHead] = HEAD_FIELD;
+
 
   return [...matrix];
 }

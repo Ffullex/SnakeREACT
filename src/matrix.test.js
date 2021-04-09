@@ -2,14 +2,16 @@ import {
   createFood,
   DOWN,
   EMPTY_FIELD,
-  FIELD_SIZE,
+  FIELD_SIZE, FOOD_FIELD,
   getNextMatrix,
   HEAD_FIELD,
   LEFT,
   RIGHT,
   searchFood,
-  searchHead,
-  UP, xHead, yHead
+  searchHead, switchDirection,
+  UP,
+  xHead,
+  yHead
 } from './matrix';
 import { createMatrix } from './matrix';
 
@@ -74,50 +76,54 @@ test('Тест функции поиска Head', () => {
 
 test('Тест на выход за рамки массива UP', () => {
   let initialMatrix = createMatrix();
-  initialMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = EMPTY_FIELD;
+  initialMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = FOOD_FIELD;
   initialMatrix[0][0] = HEAD_FIELD;
+
   let presentMatrix = createMatrix();
-  presentMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = EMPTY_FIELD;
+  presentMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = FOOD_FIELD;
   presentMatrix[FIELD_SIZE - 1][0] = HEAD_FIELD;
 
   initialMatrix = getNextMatrix(initialMatrix, UP);
-  expect(initialMatrix).toBe(presentMatrix);
+  expect(initialMatrix).toEqual(presentMatrix);
 });
 
 test('Тест на выход за рамки массива DOWN', () => {
   let initialMatrix = createMatrix();
-  initialMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = EMPTY_FIELD;
+  initialMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = FOOD_FIELD;
   initialMatrix[FIELD_SIZE - 1][0] = HEAD_FIELD;
+
   let presentMatrix = createMatrix();
-  presentMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = EMPTY_FIELD;
+  presentMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = FOOD_FIELD;
   presentMatrix[0][0] = HEAD_FIELD;
 
   initialMatrix = getNextMatrix(initialMatrix, DOWN);
-  expect(initialMatrix).toBe(presentMatrix);
+  expect(initialMatrix).toEqual(presentMatrix);
 });
 
 test('Тест на выход за рамки массива LEFT', () => {
   let initialMatrix = createMatrix();
-  initialMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = EMPTY_FIELD;
+  initialMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = FOOD_FIELD;
   initialMatrix[0][0] = HEAD_FIELD;
+
   let presentMatrix = createMatrix();
-  presentMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = EMPTY_FIELD;
+  presentMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = FOOD_FIELD;
   presentMatrix[0][FIELD_SIZE - 1] = HEAD_FIELD;
 
   initialMatrix = getNextMatrix(initialMatrix, LEFT);
-  expect(initialMatrix).toBe(presentMatrix);
+  expect(initialMatrix).toEqual(presentMatrix);
 });
 
 test('Тест на выход за рамки массива RIGHT', () => {
   let initialMatrix = createMatrix();
-  initialMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = EMPTY_FIELD;
+  initialMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = FOOD_FIELD;
   initialMatrix[0][FIELD_SIZE - 1] = HEAD_FIELD;
+
   let presentMatrix = createMatrix();
-  presentMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = EMPTY_FIELD;
+  presentMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = FOOD_FIELD;
   presentMatrix[0][0] = HEAD_FIELD;
 
   initialMatrix = getNextMatrix(initialMatrix, RIGHT);
-  expect(initialMatrix).toBe(presentMatrix);
+  expect(initialMatrix).toEqual(presentMatrix);
 });
 
 test('Тест функции создания Food', () => {
