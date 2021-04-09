@@ -10,11 +10,6 @@ export const DOWN = 1;
 export const LEFT = 2;
 export const RIGHT = 3;
 
-// координаты еды
-let xFood;
-let yFood;
-let countFood = 0;
-
 // функция, которая создаёт матрицу/поле
 export function createMatrix() {
   const field = [];
@@ -63,10 +58,9 @@ function getRandomInt(min, max) {
 
 // Функция создания еды
 export function createFood(matrix) {
-  console.log('Количество жертв: ' + countFood);
-  countFood = countFood + 1;
-  xFood = getRandomInt(0, FIELD_SIZE);
-  yFood = getRandomInt(0, FIELD_SIZE);
+  console.log('Количество жертв: ');
+  const xFood = getRandomInt(0, FIELD_SIZE);
+  const yFood = getRandomInt(0, FIELD_SIZE);
 
   for (let row = 0; row < FIELD_SIZE; row++) {
     for (let column = 0; column < FIELD_SIZE; column++) {
@@ -81,6 +75,7 @@ export function createFood(matrix) {
       }
     }
   }
+  return matrix;
 }
 
 // Функция-флаг наличия еды
@@ -135,7 +130,7 @@ export function getNextMatrix(matrix, direct) {
   matrix[nextHead.xNextHead][nextHead.yNextHead] = HEAD_FIELD;
 
   if (!searchFood(matrix)) {
-    createFood(matrix);
+    matrix = createFood(matrix);
   }
 
   return [...matrix];
