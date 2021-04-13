@@ -20,6 +20,7 @@
     "quotes": [1, "single"],
     "comma-dangle": [2, "never"],
     "react/prop-types": [0],
+    "sonarjs/cognitive-complexity": [0],
     "react/react-in-jsx-scope": "off"
   },
   "parser": "babel-eslint"

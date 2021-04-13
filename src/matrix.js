@@ -20,7 +20,7 @@ export function createMatrix() {
     for (let j = 0; j < FIELD_SIZE; j++) {
       field[i][j] = EMPTY_FIELD;
       if (i === Math.floor(FIELD_SIZE / 2) && j === Math.floor(FIELD_SIZE / 2)) {
-        field[i][j] = HEAD_FIELD;
+        field[i][j] = 1;
       }
     }
   }
@@ -32,11 +32,13 @@ export function searchHead(matrix) {
   // Координаты головы
   let xHead;
   let yHead;
+  let maxHead = -1;
   for (let row = 0; row < FIELD_SIZE; row++) {
     for (let column = 0; column < FIELD_SIZE; column++) {
-      if (matrix[row][column] === HEAD_FIELD) {
+      if (matrix[row][column] > maxHead) {
         xHead = row;
         yHead = column;
+        maxHead = matrix[row][column];
       }
     }
   }
@@ -44,12 +46,6 @@ export function searchHead(matrix) {
 }
 
 // Функция предоставления случайных целых чисел не менее min и менее max
-/**
- *
- * @param min
- * @param max
- * @returns {number}
- */
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -115,19 +111,36 @@ export function switchDirection(xHead, yHead, direct) {
   return { xNextHead, yNextHead };
 }
 
+export function minusOne(matrix) {
+  for (let row = 0; row < FIELD_SIZE; row++) {
+    for (let column = 0; column < FIELD_SIZE; column++) {
+      if (matrix[row][column] > EMPTY_FIELD) {
+        matrix[row][column] = matrix[row][column] - 1;
+      }
+    }
+  }
+}
+
 // функция, предоставляющая следующее состояние матрицы
 export function getNextMatrix(matrix, direct) {
   // Координаты головы
   const prevHead = searchHead(matrix);
 
-  // занулить предыдущее расположение головы
-  matrix[prevHead.xHead][prevHead.yHead] = EMPTY_FIELD;
-
   // Изменяет координаты головы
   const nextHead = switchDirection(prevHead.xHead, prevHead.yHead, direct);
 
-  // Сделать поле головой в соответствии с направлением
-  matrix[nextHead.xNextHead][nextHead.yNextHead] = HEAD_FIELD;
+  // проверить поле после головы
+  if (matrix[nextHead.xNextHead][nextHead.yNextHead] < 0) {
+    matrix[nextHead.xNextHead][nextHead.yNextHead] =
+      matrix[nextHead.xNextHead][nextHead.yNextHead] + 1;
+  } else if (matrix[nextHead.xNextHead][nextHead.yNextHead] === 0) {
+    const head = matrix[nextHead.xNextHead][nextHead.yNextHead];
+    minusOne(matrix);
+    matrix[nextHead.xNextHead][nextHead.yNextHead] = head;
+  } else {
+    // game over
+    return 0;
+  }
 
   if (!searchFood(matrix)) {
     matrix = createFood(matrix);

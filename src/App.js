@@ -7,6 +7,7 @@ import { createMatrix, DOWN, getNextMatrix, LEFT, RIGHT, UP } from './matrix';
 import { Field } from './stories/Field';
 
 function App() {
+  // eslint-disable-next-line
   const [matrix, setMatrix] = useState(createMatrix());
   const direct = useRef(UP);
 
