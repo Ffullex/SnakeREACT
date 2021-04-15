@@ -9,22 +9,27 @@ import { Field } from './stories/Field';
 function App() {
   const [matrix, setMatrix] = useState(createMatrix());
   const direct = useRef(UP);
+  const upArrow = ['w', 'W', 'ArrowUp'];
+  const downArrow = ['s', 'S', 'ArrowDown'];
+  const leftArrow = ['a', 'A', 'ArrowLeft'];
+  const rightArrow = ['d', 'D', 'ArrowRight'];
 
-  useKey('w', () => (direct.current = UP));
-  useKey('W', () => (direct.current = UP));
-  useKey('ArrowUp', () => (direct.current = UP));
-
-  useKey('s', () => (direct.current = DOWN));
-  useKey('S', () => (direct.current = DOWN));
-  useKey('ArrowDown', () => (direct.current = DOWN));
-
-  useKey('a', () => (direct.current = LEFT));
-  useKey('A', () => (direct.current = LEFT));
-  useKey('ArrowLeft', () => (direct.current = LEFT));
-
-  useKey('d', () => (direct.current = RIGHT));
-  useKey('D', () => (direct.current = RIGHT));
-  useKey('ArrowRight', () => (direct.current = RIGHT));
+  useKey(
+    event => upArrow.includes(event.key),
+    () => (direct.current = UP)
+  );
+  useKey(
+    event => downArrow.includes(event.key),
+    () => (direct.current = DOWN)
+  );
+  useKey(
+    event => leftArrow.includes(event.key),
+    () => (direct.current = LEFT)
+  );
+  useKey(
+    event => rightArrow.includes(event.key),
+    () => (direct.current = RIGHT)
+  );
 
   useEffect(() => {
     let intervalId;

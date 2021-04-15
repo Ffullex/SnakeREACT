@@ -1,3 +1,5 @@
+import {findRenderedComponentWithType} from "react-dom/test-utils";
+
 export const FIELD_SIZE = 21;
 export const EMPTY_FIELD = 0;
 export const FOOD_FIELD = -1;
@@ -49,10 +51,32 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min; //Максимум не включается, минимум включается
 }
-
+const final = [
+  [-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1],
+  [0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0],
+  [0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0],
+  [0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0],
+  [0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0],
+  [0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0],
+  [0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0],
+  [0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0],
+  [-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1]
+];
 // Функция создания еды
 export function createFood(matrix) {
-  console.log('Количество жертв: ');
+  console.log('Количество жертв: ' + 1);
   const xFood = getRandomInt(0, FIELD_SIZE);
   const yFood = getRandomInt(0, FIELD_SIZE);
 
@@ -84,18 +108,22 @@ export function switchDirection(xHead, yHead, direct) {
     case UP:
       xHead--;
       if (xHead < 0) xHead = FIELD_SIZE - 1;
+      // if (prevDirect === DOWN) xHead++;
       break;
     case DOWN:
       xHead++;
       if (xHead > FIELD_SIZE - 1) xHead = 0;
+      // if (prevDirect === UP) xHead--;
       break;
     case LEFT:
       yHead--;
       if (yHead < 0) yHead = FIELD_SIZE - 1;
+      // if (prevDirect === RIGHT) yHead++;
       break;
     case RIGHT:
       yHead++;
       if (yHead > FIELD_SIZE - 1) yHead = 0;
+      // if (prevDirect === LEFT) yHead--;
       break;
   }
   const xNextHead = xHead;
@@ -121,6 +149,9 @@ export function getNextMatrix(matrix, direct) {
   // Изменяет координаты головы
   const { xNextHead, yNextHead } = switchDirection(xHead, yHead, direct);
 
+  // let prevDirect = 0;
+  // prevDirect = direct;
+
   // проверить поле после головы
   if (matrix[xNextHead][yNextHead] === FOOD_FIELD) {
     matrix[xNextHead][yNextHead] = matrix[xHead][yHead] + 1;
@@ -130,7 +161,7 @@ export function getNextMatrix(matrix, direct) {
     matrix[xNextHead][yNextHead] = head;
   } else {
     // game over
-    return 0;
+    return final;
   }
 
   if (!searchFood(matrix)) {
@@ -138,4 +169,16 @@ export function getNextMatrix(matrix, direct) {
   }
 
   return [...matrix];
+}
+
+export function getWormLength(matrix) {
+  let bodyCount = 0;
+  for ( let i = 0; i < FIELD_SIZE; i++){
+    for ( let j =0; j < FIELD_SIZE; j++){
+      if (matrix[i][j] > 0)
+        bodyCount++;
+    }
+  }
+  bodyCount--;
+  return bodyCount;
 }
