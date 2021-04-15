@@ -1,5 +1,3 @@
-import { findRenderedComponentWithType } from 'react-dom/test-utils';
-
 export const FIELD_SIZE = 21;
 export const EMPTY_FIELD = 0;
 export const FOOD_FIELD = -1;
@@ -178,6 +176,5 @@ export function getWormLength(matrix) {
       if (matrix[i][j] > 0) bodyCount++;
     }
   }
-  bodyCount--;
-  return bodyCount;
+  return bodyCount - 1;
 }

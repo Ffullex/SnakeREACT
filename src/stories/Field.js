@@ -10,12 +10,10 @@ export const Field = ({ matrix }) => {
   const { maxHead } = searchHead(matrix);
   return (
     <div className="matrix">
-      {matrix.map(row => (
-        // eslint-disable-next-line react/jsx-key
-        <div className="row">
-          {row.map(item => (
-            // eslint-disable-next-line react/jsx-key
-            <Box status={item} maxHead={maxHead} />
+      {matrix.map((row, rowIndex) => (
+        <div className="row" key={rowIndex}>
+          {row.map((item, itemIndex) => (
+            <Box status={item} maxHead={maxHead} key={itemIndex} />
           ))}
         </div>
       ))}

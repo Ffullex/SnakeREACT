@@ -23,7 +23,7 @@ export const Box = ({ status, maxHead }) => {
 };
 
 Box.propTypes = {
-  status: PropTypes.oneOf([EMPTY_FIELD, FOOD_FIELD])
+  status: PropTypes.number
 };
 
 Box.defaultProps = {

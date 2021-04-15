@@ -3,8 +3,9 @@ import { useKey } from 'react-use';
 import './matrix';
 import './App.css';
 import Header from './components/Header';
-import { createMatrix, DOWN, getNextMatrix, LEFT, RIGHT, UP } from './matrix';
+import { createMatrix, DOWN, getNextMatrix, getWormLength, LEFT, RIGHT, UP } from './matrix';
 import { Field } from './stories/Field';
+import { Counter } from './stories/Counter';
 
 function App() {
   const [matrix, setMatrix] = useState(createMatrix());
@@ -45,6 +46,7 @@ function App() {
   return (
     <>
       <Header />
+      <Counter bodyCount={getWormLength(matrix)} />
       <Field matrix={matrix} />
     </>
   );
