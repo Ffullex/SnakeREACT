@@ -1,7 +1,5 @@
 export const FIELD_SIZE = 21;
 export const EMPTY_FIELD = 0;
-export const HEAD_FIELD = 1;
-export const BODY_FIELD = 2;
 export const FOOD_FIELD = -1;
 
 // константы направления змейки
@@ -42,7 +40,7 @@ export function searchHead(matrix) {
       }
     }
   }
-  return { xHead, yHead };
+  return { maxHead, xHead, yHead };
 }
 
 // Функция предоставления случайных целых чисел не менее min и менее max
@@ -60,12 +58,6 @@ export function createFood(matrix) {
 
   for (let row = 0; row < FIELD_SIZE; row++) {
     for (let column = 0; column < FIELD_SIZE; column++) {
-      // if (xFood === xHead && yFood === yHead) {
-      //   countFood = countFood + 1;
-      //   console.log(countFood + 'aasdasdsad');
-      //   xFood = getRandomInt(0, FIELD_SIZE);
-      //   yFood = getRandomInt(0, FIELD_SIZE);
-      // }
       if (row === xFood && column === yFood) {
         matrix[row][column] = FOOD_FIELD;
       }
@@ -124,19 +116,18 @@ export function minusOne(matrix) {
 // функция, предоставляющая следующее состояние матрицы
 export function getNextMatrix(matrix, direct) {
   // Координаты головы
-  const prevHead = searchHead(matrix);
+  const { xHead, yHead } = searchHead(matrix);
 
   // Изменяет координаты головы
-  const nextHead = switchDirection(prevHead.xHead, prevHead.yHead, direct);
+  const { xNextHead, yNextHead } = switchDirection(xHead, yHead, direct);
 
   // проверить поле после головы
-  if (matrix[nextHead.xNextHead][nextHead.yNextHead] < 0) {
-    matrix[nextHead.xNextHead][nextHead.yNextHead] =
-      matrix[nextHead.xNextHead][nextHead.yNextHead] + 1;
-  } else if (matrix[nextHead.xNextHead][nextHead.yNextHead] === 0) {
-    const head = matrix[nextHead.xNextHead][nextHead.yNextHead];
+  if (matrix[xNextHead][yNextHead] === FOOD_FIELD) {
+    matrix[xNextHead][yNextHead] = matrix[xHead][yHead] + 1;
+  } else if (matrix[xNextHead][yNextHead] === 0) {
+    const head = matrix[xHead][yHead];
     minusOne(matrix);
-    matrix[nextHead.xNextHead][nextHead.yNextHead] = head;
+    matrix[xNextHead][yNextHead] = head;
   } else {
     // game over
     return 0;

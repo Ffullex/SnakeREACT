@@ -4,7 +4,6 @@ import {
   FIELD_SIZE,
   FOOD_FIELD,
   getNextMatrix,
-  HEAD_FIELD,
   LEFT,
   RIGHT,
   searchFood,
@@ -14,22 +13,88 @@ import {
 import { createMatrix } from './matrix';
 
 test('Тест функции создания матрицы', () => {
-  const array = [];
-  for (let i = 0; i < FIELD_SIZE; i++) {
-    if (array[i] === undefined) {
-      array[i] = [];
-    }
-    for (let j = 0; j < FIELD_SIZE; j++) {
-      array[i][j] = 0;
-      if (i === Math.floor(FIELD_SIZE / 2) && j === Math.floor(FIELD_SIZE / 2)) {
-        array[i][j] = HEAD_FIELD;
-      }
-    }
-  }
-  expect(createMatrix()).toEqual(array);
+  const initialMatrix = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ];
+  const nextMatrix = createMatrix();
+  expect(nextMatrix).toEqual(initialMatrix);
 });
 
 test('Идёт на еду', () => {
+  const initialMatrix = [
+    [-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ];
+
+  const nextMatrixIdeal = [
+    [-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ];
+  const nextMatrix = getNextMatrix(initialMatrix, UP);
+  expect(nextMatrix.length).toBe(FIELD_SIZE);
+  expect(nextMatrix[0].length).toBe(FIELD_SIZE);
+  expect(nextMatrix).toEqual(nextMatrixIdeal);
+});
+
+test('Идёт на поле', () => {
   const initialMatrix = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -64,9 +129,9 @@ test('Идёт на еду', () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -77,37 +142,37 @@ test('Идёт на еду', () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
-  const nextMatrix = getNextMatrix(initialMatrix, UP);
+  const nextMatrix = getNextMatrix(initialMatrix, LEFT);
   expect(nextMatrix.length).toBe(FIELD_SIZE);
   expect(nextMatrix[0].length).toBe(FIELD_SIZE);
   expect(nextMatrix).toEqual(nextMatrixIdeal);
 });
 
-test('Идёт вниз', () => {
+test('Идёт низ', () => {
   const initialMatrix = createMatrix();
   const nextMatrix = getNextMatrix(initialMatrix, DOWN);
   expect(nextMatrix.length).toBe(FIELD_SIZE);
   expect(nextMatrix[0].length).toBe(FIELD_SIZE);
-  expect(nextMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)]).not.toBe(HEAD_FIELD);
-  expect(nextMatrix[Math.floor(FIELD_SIZE / 2) + 1][Math.floor(FIELD_SIZE / 2)]).toBe(HEAD_FIELD);
+  expect(nextMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)]).not.toBe(1);
+  expect(nextMatrix[Math.floor(FIELD_SIZE / 2) + 1][Math.floor(FIELD_SIZE / 2)]).toBe(1);
 });
 
-test('Идёт влево', () => {
+test('Идёт слева', () => {
   const initialMatrix = createMatrix();
   const nextMatrix = getNextMatrix(initialMatrix, LEFT);
   expect(nextMatrix.length).toBe(FIELD_SIZE);
   expect(nextMatrix[0].length).toBe(FIELD_SIZE);
-  expect(nextMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)]).not.toBe(HEAD_FIELD);
-  expect(nextMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2) - 1]).toBe(HEAD_FIELD);
+  expect(nextMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)]).not.toBe(1);
+  expect(nextMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2) - 1]).toBe(1);
 });
 
-test('Идёт вправо', () => {
+test('Идёт справа', () => {
   const initialMatrix = createMatrix();
   const nextMatrix = getNextMatrix(initialMatrix, RIGHT);
   expect(nextMatrix.length).toBe(FIELD_SIZE);
   expect(nextMatrix[0].length).toBe(FIELD_SIZE);
-  expect(nextMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)]).not.toBe(HEAD_FIELD);
-  expect(nextMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2) + 1]).toBe(HEAD_FIELD);
+  expect(nextMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)]).not.toBe(1);
+  expect(nextMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2) + 1]).toBe(1);
 });
 
 test('Тест функции поиска Head', () => {
@@ -134,30 +199,71 @@ test('Тест функции поиска Head', () => {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
-  expect(searchHead(initialMatrix)).toEqual({ xHead: 10, yHead: 10 });
+  expect(searchHead(initialMatrix)).toEqual({ maxHead: 4, xHead: 10, yHead: 10 });
 });
 
 test('Тест на выход за рамки массива UP', () => {
-  let initialMatrix = createMatrix();
-  initialMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = FOOD_FIELD;
-  initialMatrix[0][0] = HEAD_FIELD;
+  const initialMatrix = [
+    [-1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ];
 
-  let presentMatrix = createMatrix();
-  presentMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = FOOD_FIELD;
-  presentMatrix[FIELD_SIZE - 1][0] = HEAD_FIELD;
+  const presentMatrix = [
+    [-1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ];
 
-  initialMatrix = getNextMatrix(initialMatrix, UP);
-  expect(initialMatrix).toEqual(presentMatrix);
+  //console.table(getNextMatrix(initialMatrix, UP));
+  console.table(presentMatrix);
+  expect(getNextMatrix(initialMatrix, UP)).toEqual(presentMatrix);
 });
 
 test('Тест на выход за рамки массива DOWN', () => {
   let initialMatrix = createMatrix();
   initialMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = FOOD_FIELD;
-  initialMatrix[FIELD_SIZE - 1][0] = HEAD_FIELD;
+  initialMatrix[FIELD_SIZE - 1][0] = 1;
 
   let presentMatrix = createMatrix();
   presentMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = FOOD_FIELD;
-  presentMatrix[0][0] = HEAD_FIELD;
+  presentMatrix[0][0] = 1;
 
   initialMatrix = getNextMatrix(initialMatrix, DOWN);
   expect(initialMatrix).toEqual(presentMatrix);
@@ -166,11 +272,11 @@ test('Тест на выход за рамки массива DOWN', () => {
 test('Тест на выход за рамки массива LEFT', () => {
   let initialMatrix = createMatrix();
   initialMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = FOOD_FIELD;
-  initialMatrix[0][0] = HEAD_FIELD;
+  initialMatrix[0][0] = 1;
 
   let presentMatrix = createMatrix();
   presentMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = FOOD_FIELD;
-  presentMatrix[0][FIELD_SIZE - 1] = HEAD_FIELD;
+  presentMatrix[0][FIELD_SIZE - 1] = 1;
 
   initialMatrix = getNextMatrix(initialMatrix, LEFT);
   expect(initialMatrix).toEqual(presentMatrix);
@@ -179,11 +285,11 @@ test('Тест на выход за рамки массива LEFT', () => {
 test('Тест на выход за рамки массива RIGHT', () => {
   let initialMatrix = createMatrix();
   initialMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = FOOD_FIELD;
-  initialMatrix[0][FIELD_SIZE - 1] = HEAD_FIELD;
+  initialMatrix[FIELD_SIZE - 1][1] = 1;
 
   let presentMatrix = createMatrix();
   presentMatrix[Math.floor(FIELD_SIZE / 2)][Math.floor(FIELD_SIZE / 2)] = FOOD_FIELD;
-  presentMatrix[0][0] = HEAD_FIELD;
+  presentMatrix[0][1] = 1;
 
   initialMatrix = getNextMatrix(initialMatrix, RIGHT);
   expect(initialMatrix).toEqual(presentMatrix);

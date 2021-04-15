@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Box.css';
-import { BODY_FIELD, EMPTY_FIELD, FOOD_FIELD, HEAD_FIELD } from '../matrix';
+import { EMPTY_FIELD, searchHead } from '../matrix';
 import { Box } from './Box.js';
 import './Field.css';
 
 // компонент отрисовки поля
 export const Field = ({ matrix }) => {
+  const { maxHead } = searchHead(matrix);
   return (
     <div className="matrix">
       {matrix.map(row => (
@@ -14,7 +15,7 @@ export const Field = ({ matrix }) => {
         <div className="row">
           {row.map(item => (
             // eslint-disable-next-line react/jsx-key
-            <Box status={item} />
+            <Box status={item} maxHead={maxHead} />
           ))}
         </div>
       ))}
@@ -23,7 +24,7 @@ export const Field = ({ matrix }) => {
 };
 
 Field.propTypes = {
-  status: PropTypes.oneOf([EMPTY_FIELD, HEAD_FIELD, BODY_FIELD, FOOD_FIELD])
+  status: PropTypes.number
 };
 
 Field.defaultProps = {
