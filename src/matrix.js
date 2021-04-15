@@ -1,4 +1,4 @@
-import {findRenderedComponentWithType} from "react-dom/test-utils";
+import { findRenderedComponentWithType } from 'react-dom/test-utils';
 
 export const FIELD_SIZE = 21;
 export const EMPTY_FIELD = 0;
@@ -173,10 +173,9 @@ export function getNextMatrix(matrix, direct) {
 
 export function getWormLength(matrix) {
   let bodyCount = 0;
-  for ( let i = 0; i < FIELD_SIZE; i++){
-    for ( let j =0; j < FIELD_SIZE; j++){
-      if (matrix[i][j] > 0)
-        bodyCount++;
+  for (let i = 0; i < FIELD_SIZE; i++) {
+    for (let j = 0; j < FIELD_SIZE; j++) {
+      if (matrix[i][j] > 0) bodyCount++;
     }
   }
   bodyCount--;
