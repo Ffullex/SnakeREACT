@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+.exit{
+  position: absolute;
+  margin: 0 30px 0;
+  padding: 20px;
+  font-size: 24px;
+  color: #fcce00;
+  background-color: #394d68;
+  width: 15%;
+  top: 63%;
+  left:75%;
+  border-radius: 7%;
+  border: none;
+}
+.workspace{
+  position: absolute;
+  width: 1200px;
+  height: 800px;
+  background-color: #020000;
+}

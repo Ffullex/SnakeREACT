@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './Counter.css';
 
 export const Counter = ({ bodyCount }) => {
-  return <div> Количество скушцанного: {bodyCount} </div>;
+  return <div className="counter"> Количество скушцанного: {bodyCount} </div>;
 };
 
 Counter.propTypes = {

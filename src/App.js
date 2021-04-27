@@ -45,9 +45,20 @@ function App() {
 
   return (
     <>
-      <Header />
-      <Counter bodyCount={getWormLength(matrix)} />
-      <Field matrix={matrix} />
+      <div className="workspace">
+        <Header />
+        <button
+          className="exit"
+          onClick={() => {
+            location.reload();
+          }}
+        >
+          {' '}
+          Restart Page{' '}
+        </button>
+        <Counter bodyCount={getWormLength(matrix)} />
+        <Field matrix={matrix} />
+      </div>
     </>
   );
 }

@@ -1,0 +1,24 @@
+.header{
+    position: absolute;
+    font-size: 24px;
+    color: #ffe13b;
+    /*background-color: #0F3C7AFF;*/
+    width: 20%;
+    top: 10%;
+    height: 25%;
+    margin: 0 30px 0;
+    padding: 0 20px 0;
+    border-radius: 5%;
+}
+.header1{
+    position: absolute;
+    left: 176%;
+    top: -54%;
+    padding: 3px;
+    border-radius: 5%;
+}
+.header2{
+    position: relative;
+    margin: auto;
+    padding: 10px;
+ }
