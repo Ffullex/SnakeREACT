@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
 import { useKey } from 'react-use';
 import './matrix';
 import './App.css';
 import Header from './components/Header';
 import { createMatrix, DOWN, getNextMatrix, getWormLength, LEFT, RIGHT, UP } from './matrix';
+// @ts-ignore
 import { Field } from './stories/Field.tsx';
 import { Counter } from './stories/Counter';
+import { useEffect, useState, useRef } from 'react';
 
 function App() {
   const [matrix, setMatrix] = useState(createMatrix());
@@ -33,7 +34,7 @@ function App() {
   );
 
   useEffect(() => {
-    let intervalId;
+    let intervalId: any;
     intervalId = setInterval(() => {
       setMatrix(getNextMatrix(matrix, direct.current));
     }, 100);
