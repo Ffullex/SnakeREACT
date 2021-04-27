@@ -4,7 +4,7 @@ import './matrix';
 import './App.css';
 import Header from './components/Header';
 import { createMatrix, DOWN, getNextMatrix, getWormLength, LEFT, RIGHT, UP } from './matrix';
-import { Field } from './stories/Field';
+import { Field } from './stories/Field.tsx';
 import { Counter } from './stories/Counter';
 
 function App() {
@@ -50,7 +50,7 @@ function App() {
         <button
           className="exit"
           onClick={() => {
-            location.reload();
+            getNextMatrix(createMatrix(), UP);
           }}
         >
           {' '}

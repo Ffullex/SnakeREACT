@@ -1,6 +1,6 @@
 import React from 'react';
 import { createMatrix } from '../matrix';
-import { Field } from './Field';
+import { Field } from './Field.tsx';
 
 export default {
   title: 'Example/Field',

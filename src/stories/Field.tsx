@@ -1,12 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import './Box.css';
-import { EMPTY_FIELD, searchHead } from '../matrix';
-import { Box } from './Box.js';
+import { searchHead } from '../matrix';
+// @ts-ignore
+import { Box } from './Box.tsx';
 import './Field.css';
 
+export type MatrixProps = {
+  matrix: number[][];
+};
+
 // компонент отрисовки поля
-export const Field = ({ matrix }) => {
+export const Field = ({ matrix }: MatrixProps) => {
   const { maxHead } = searchHead(matrix);
   return (
     <div className="matrix">
@@ -19,12 +22,4 @@ export const Field = ({ matrix }) => {
       ))}
     </div>
   );
-};
-
-Field.propTypes = {
-  status: PropTypes.number
-};
-
-Field.defaultProps = {
-  status: EMPTY_FIELD
 };

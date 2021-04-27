@@ -12,6 +12,7 @@
 }
 .header1{
     position: absolute;
+    min-height: 3%;
     left: 176%;
     top: -54%;
     padding: 3px;
