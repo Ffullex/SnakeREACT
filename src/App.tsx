@@ -36,7 +36,7 @@ function App() {
   useEffect(() => {
     let intervalId: any;
     intervalId = setInterval(() => {
-      setMatrix(getNextMatrix(matrix, direct.current));
+      setMatrix(matrix => getNextMatrix(matrix, direct.current));
     }, 100);
 
     return () => {
