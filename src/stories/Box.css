@@ -1,24 +1,24 @@
 .box {
     width: 20px;
     height: 20px;
-    border: 1px solid #2b8907;
+    border: 1px solid #033101;
     margin: 1px 1px 1px 1px;
 }
 
 .empty{
     /*background-image: url('./Field.png');*/
-    background-color: #0c3606;
+    background-color: #032f13;
     background-size: 20px;
     border-radius: 50%;
 }
 
 .head{
-    background-color: #f8d104;
+    background-color: #ffe13b;
     border-radius: 50%;
  }
 
 .body{
-    background-color: #25fd00;
+    background-color: #11ff00;
     border-radius: 50%;
 }
 
