@@ -18,19 +18,20 @@ function App() {
 
   useKey(
     event => upArrow.includes(event.key),
-    () => (direct.current = UP)
+    () => direct.current !== DOWN && (direct.current = UP)
   );
   useKey(
     event => downArrow.includes(event.key),
-    () => (direct.current = DOWN)
+
+    () => direct.current !== UP && (direct.current = DOWN)
   );
   useKey(
     event => leftArrow.includes(event.key),
-    () => (direct.current = LEFT)
+    () => direct.current !== RIGHT && (direct.current = LEFT)
   );
   useKey(
     event => rightArrow.includes(event.key),
-    () => (direct.current = RIGHT)
+    () => direct.current !== LEFT && (direct.current = RIGHT)
   );
 
   useEffect(() => {
