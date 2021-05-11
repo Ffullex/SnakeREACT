@@ -1,25 +1,29 @@
 .box {
     width: 20px;
     height: 20px;
-    border: 1px solid #50195a;
+    border: 1px solid #2b8907;
     margin: 1px 1px 1px 1px;
 }
 
 .empty{
-    background-image: url('./Field.png');
+    /*background-image: url('./Field.png');*/
+    background-color: #0c3606;
     background-size: 20px;
+    border-radius: 50%;
 }
 
 .head{
-     background-color: #ffe13b;
+    background-color: #f8d104;
+    border-radius: 50%;
  }
 
 .body{
-    background-color: #394d68;
+    background-color: #25fd00;
+    border-radius: 50%;
 }
 
 .food{
     background-image: url('./Food.png');
     background-size: 20px;
-
+    border-radius: 50%;
 }

@@ -10,7 +10,8 @@ import {
   searchFood,
   searchHead,
   UP,
-  createMatrix, copyArray
+  createMatrix,
+  copyArray
 } from './matrix';
 
 test('Тест функции createMatrix', () => {
