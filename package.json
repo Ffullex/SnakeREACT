@@ -22,7 +22,7 @@
   },
   "homepage": "https://Ffullex.github.io/SnakeREACT",
   "scripts": {
-    "deploy": "react-scripts build && gh-pages -d build",
+    "deploy": "rmdir /s /q docs && react-scripts build && move build docs",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
