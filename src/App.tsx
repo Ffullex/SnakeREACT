@@ -52,11 +52,10 @@ function App() {
         <button
           className="exit"
           onClick={() => {
-            getNextMatrix(createMatrix(), UP);
+            setMatrix(createMatrix());
           }}
         >
-          {' '}
-          Restart Page{' '}
+          Restart Game
         </button>
         <Counter bodyCount={getWormLength(matrix)} />
         <Field matrix={matrix} />
